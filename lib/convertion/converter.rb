@@ -64,7 +64,7 @@ class Converter
     a = Time.now - a
     LoggerHelper.print_to_log 'End convert'
     puts '--' * 75
-    File.open("#{@output_folder}/results.csv", 'a'){ |file| file.write "#{File.basename(input_filename)};#{FileHelper.file_size(input_filename)/1000/1000.0};#{a};\n" }
+    File.open("#{@output_folder}/results.csv", 'a') { |file| file.write "#{File.basename(input_filename)};#{FileHelper.file_size(input_filename) / 1000 / 1000.0};#{a};\n" }
   end
 
   # @param [Hash] option_hash. Key - is a start format, value - result format
@@ -73,7 +73,7 @@ class Converter
     @output_format = option_hash.values.first
     @output_folder = "#{@base_output_folder}/#{@input_format}_to_#{@output_format}"
     create_folder @output_folder
-    File.open("#{@output_folder}/results.csv", 'w'){ |file| file.write "filename;filesize(kbytes);time(sec)\n" }
+    File.open("#{@output_folder}/results.csv", 'w') { |file| file.write "filename;filesize(kbytes);time(sec)\n" }
     file_list = get_file_paths_list(@base_file_folder, @input_format)
     file_list.each do |current_file_to_convert|
       output_file_path = "#{@output_folder}/#{File.basename(current_file_to_convert, '.*')}.#{@output_format}"
