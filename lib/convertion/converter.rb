@@ -67,11 +67,16 @@ class Converter
     File.open("#{@output_folder}/results.csv", 'a') { |file| file.write "#{File.basename(input_filename)};#{FileHelper.file_size(input_filename) / 1000 / 1000.0};#{a};\n" }
   end
 
+  def x2t_exist?
+    File.exist?(@bin_path)
+  end
+
   # @param [Hash] option_hash. Key - is a start format, value - result format
   def convert(option_hash)
+    raise "x2t file is not found in #{@bin_path} path" unless x2t_exist?
     @input_format = option_hash.keys.first
     @output_format = option_hash.values.first
-    @output_folder = "#{@base_output_folder}/#{@input_format}_to_#{@output_format}"
+    @output_folder = "#{@base_output_folder}/#{@input_format}_to_#{@output_format}_by_#{Time.now.strftime('%d_%b_%Y_%H:%M:%S')}"
     create_folder @output_folder
     File.open("#{@output_folder}/results.csv", 'w') { |file| file.write "filename;filesize(kbytes);time(sec)\n" }
     file_list = get_file_paths_list(@base_file_folder, @input_format)
@@ -80,9 +85,6 @@ class Converter
       convert_file(current_file_to_convert, output_file_path)
     end
     get_file_difference(file_list, get_file_paths_list(@output_folder, @output_format))
+    @output_folder
   end
 end
-
-# Converter.new('../../assets/files',
-#               '../../results',
-#               '../../assets/x2t/x2t').convert(:docx => :rtf)
