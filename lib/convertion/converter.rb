@@ -1,21 +1,14 @@
 require_relative '../app_manager'
 
-# Example:
-# -----------------------------------------
-# Converter.new('assets/files',
-#               'results',
-#               'assets/x2t/x2t').convert(:docx => :rtf)
-# -----------------------------------------
-# Convert all xls in /home/flamine/Work/XLS anasdd all subfolders to xlsx and put it in /home/flamine/Work/xls_to_xlsx
-# xls_to_xlsx - this folder will be create
 class Converter
-  # @param [String] base_file_folder is a path to folder with all files. Can contains files other formats
-  # @param [String] output_folder is a path to folder for put files after convert
-  # @param [String] bin_path is a path to x2t file
-  def initialize(base_file_folder, output_folder, bin_path)
-    @base_file_folder = base_file_folder
-    @base_output_folder = output_folder
-    @bin_path = bin_path
+  # @param args must contain hash with keys :base_file_folder, :output_folder, and :bin_path
+  # Values for this keys - is [String] - path to folder with files for converting (:base_file_folder), path to folder for results (output_folder) and
+  # path to x2t file.
+  #
+  def initialize(*args)
+    @base_file_folder = args.first[:base_file_folder]
+    @base_output_folder = args.first[:output_folder]
+    @bin_path = args.first[:bin_path]
     @base_file_folder.chop! if @base_file_folder.rindex('/') == (@base_file_folder.size - 1)
     @base_output_folder.chop! if @base_output_folder.rindex('/') == (@base_output_folder.size - 1)
   end
