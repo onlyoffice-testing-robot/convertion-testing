@@ -27,6 +27,7 @@ class Converter
     @convert_to = config_hash['convert_to']
     @bin_path = config_hash['x2t_path']
     @font_path = config_hash['font_path']
+    config_hash
   end
 
   # @param [String] path is a path to folder

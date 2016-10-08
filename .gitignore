@@ -1,5 +1,4 @@
 .idea/
 Gemfile.lock
 assets/x2t/x2t
-results/docx_to_rtf/
-spec/
+results/
