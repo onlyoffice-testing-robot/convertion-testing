@@ -2,3 +2,4 @@
 Gemfile.lock
 assets/x2t/x2t
 results/
+spec/test_data/tmp
