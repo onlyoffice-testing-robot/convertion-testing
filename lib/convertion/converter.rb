@@ -72,9 +72,9 @@ class Converter
     a = Time.now
     `#{command}`
     a = Time.now - a
+    File.open("#{@output_folder}/results.csv", 'a') { |file| file.write "#{File.basename(input_filename)};#{FileHelper.file_size(input_filename) / 1000 / 1000.0};#{a};\n" }
     LoggerHelper.print_to_log 'End convert'
     puts '--' * 75
-    File.open("#{@output_folder}/results.csv", 'a') { |file| file.write "#{File.basename(input_filename)};#{FileHelper.file_size(input_filename) / 1000 / 1000.0};#{a};\n" }
   end
 
   def x2t_exist?
