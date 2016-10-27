@@ -48,18 +48,17 @@ class Converter
     input_file_names = base_file_list.map { |current_path| File.basename(current_path, '.*') }
     output_file_names = last_file_list.map { |current_path| File.basename(current_path, '.*') }
     not_converted = input_file_names - output_file_names
-    File.open("#{@output_folder}/not_converted.txt", 'w') { |i| i.write 'Not converted' }
-    not_converted.each do |file|
-      LoggerHelper.print_to_log "File Not Converted: #{file}"
-      File.open("#{@output_folder}/not_converted.txt", 'a') { |i| i.write file + "\n" }
-    end
-    not_converted_full_name = not_converted.map { |file_name| `find #{@convert_from} -name '#{file_name}.#{@input_format}'`.chomp }
+    input_file_format = File.extname(base_file_list.first)
+    not_converted_full_name = not_converted.map { |file_name|
+      `find #{@convert_from} -name "#{file_name}#{input_file_format}"`.chomp
+    }
     not_converted_full_name.each do |not_converted_file|
       begin
-        FileHelper.copy_file(not_converted_file, "#{@output_folder}/not_converted")
+        FileHelper.copy_file(not_converted_file, "#{@convert_to}/not_converted")
       rescue
         LoggerHelper.print_to_log "#{not_converted_file} not copy"
       end
+      not_converted_full_name
     end
   end
 
