@@ -65,16 +65,24 @@ class Converter
 
   # @param [String] input_filename - input filename with format
   # @param [String] output_filename - input filename with format
-  def convert_file(input_filename, output_filename)
+  def convert_file(input_filename, output_filename, csv_log = true)
     LoggerHelper.print_to_log "Start convert file #{input_filename} to #{output_filename}"
     command = "\"#{@bin_path}\" \"#{input_filename}\" \"#{output_filename}\" \"#{@font_path}\""
     LoggerHelper.print_to_log "Run command #{command}"
     a = Time.now
     `#{command}`
     a = Time.now - a
-    File.open("#{@output_folder}/results.csv", 'a') { |file| file.write "#{File.basename(input_filename)};#{FileHelper.file_size(input_filename) / 1000 / 1000.0};#{a};\n" }
+    File.open("#{@output_folder}/results.csv", 'a') { |file| file.write "#{File.basename(input_filename)};#{FileHelper.file_size(input_filename) / 1000 / 1000.0};#{a};\n" } if csv_log
     LoggerHelper.print_to_log 'End convert'
     puts '--' * 75
+  end
+
+  # :input_file => 'assets/files/1.xls', :format_to => 'xlsx'
+  def convert_one(*args)
+    raise "x2t file is not found in #{@bin_path} path" unless x2t_exist?
+    output_file_path = "#{@convert_to}/#{File.basename(args.first[:input_file], '.*')}." + args.first[:format_to]
+    convert_file(args.first[:input_file], output_file_path, false)
+    output_file_path
   end
 
   def x2t_exist?
