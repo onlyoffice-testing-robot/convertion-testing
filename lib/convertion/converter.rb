@@ -54,7 +54,7 @@ class Converter
     }
     not_converted_full_name.each do |not_converted_file|
       begin
-        FileHelper.copy_file(not_converted_file, "#{@convert_to}/not_converted")
+        FileHelper.copy_file(not_converted_file, "#{@output_folder}/not_converted")
       rescue
         LoggerHelper.print_to_log "#{not_converted_file} not copy"
       end
