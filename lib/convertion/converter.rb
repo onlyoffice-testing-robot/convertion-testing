@@ -72,7 +72,7 @@ class Converter
   end
 
   def convert
-    @output_folder = "#{@convert_to}/result_#{@output_format}_by_#{Time.now.strftime('%d_%b_%Y_%H:%M:%S')}"
+    @output_folder = "#{@convert_to}/result_#{@output_format}_by_#{Time.now.strftime('%d-%b-%Y_%H-%M-%S')}"
     create_folder @output_folder
     File.open("#{@output_folder}/results.csv", 'w') { |file| file.write "filename;filesize(kbytes);time(sec);convert_status\n" }
     get_file_paths_list(@convert_from).each do |current_file_to_convert|
