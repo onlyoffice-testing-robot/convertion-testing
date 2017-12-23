@@ -23,15 +23,22 @@ class Converter
   end
 
   # @param [String] input_filename - input filename with format
-  def convert_file(input_filename)
+  def convert_file(input_filename, performance_test)
+    count = 1
+    count = 5 if performance_test
     output_filepath = get_output_filepath(input_filename)
-    LoggerHelper.print_to_log "Start convert file #{input_filename} to #{output_filepath}"
-    command = "\"#{@bin_path}\" \"#{input_filename}\" \"#{output_filepath}\" \"#{@font_path}\""
-    LoggerHelper.print_to_log "Run command #{command}"
-    time_before = Time.now
-    `#{command}`
-    time = Time.now - time_before
-    check_file_exist(input_filename, output_filepath, time)
+    time = []
+    count.times do
+      File.delete(output_filepath) if File.exist?(output_filepath)
+      LoggerHelper.print_to_log "Start convert file #{input_filename} to #{output_filepath}"
+      command = "\"#{@bin_path}\" \"#{input_filename}\" \"#{output_filepath}\" \"#{@font_path}\""
+      LoggerHelper.print_to_log "Run command #{command}"
+      time_before = Time.now
+      `#{command}`
+      time << (Time.now - time_before)
+    end
+    time << time.inject { |sum, el| sum + el }.to_f / time.size if performance_test
+    check_file_exist(input_filename, output_filepath, time.join(';'))
     LoggerHelper.print_to_log 'End convert'
     puts '--' * 75
   end
@@ -66,16 +73,17 @@ class Converter
   end
 
   def check_macros(file)
-    # command = "\"#{@bin_path}\" -detectmacro \"#{file}\""
     system "\"#{@bin_path}\" -detectmacro \"#{file}\""
     $CHILD_STATUS.exitstatus != 0
   end
 
-  def convert
+  def convert(performance_test = false)
     @output_folder = "#{@convert_to}/result_#{@output_format}_by_#{Time.now.strftime('%d-%b-%Y_%H-%M-%S')}"
     create_folder @output_folder
-    File.open("#{@output_folder}/results.csv", 'w') { |file| file.write "filename;filesize(kbytes);time(sec);convert_status\n" }
-    get_file_paths_list(@convert_from).each do |current_file_to_convert|
+    first_line_result(performance_test)
+    files = get_file_paths_list(@convert_from)
+    files.each do |current_file_to_convert|
+      unless current_file_to_convert.include?("/home/flamine/work/xlsx/Temp/")
       p current_file_to_convert
       if @output_format == ('docm' || 'xlsm' || 'pptm')
         if check_macros(current_file_to_convert)
@@ -83,8 +91,17 @@ class Converter
           next
         end
       end
-      convert_file(current_file_to_convert)
+      convert_file(current_file_to_convert, performance_test)
+      end
     end
     @output_folder
+  end
+
+  def first_line_result(performance_test)
+    if performance_test
+      File.open("#{@output_folder}/results.csv", 'w') { |file| file.write "filename;filesize(kbytes);time 1;time 2;time 3;time 4;time 5;average;convert_status\n" }
+    else
+      File.open("#{@output_folder}/results.csv", 'w') { |file| file.write "filename;filesize(kbytes);time(sec);convert_status\n" }
+    end
   end
 end

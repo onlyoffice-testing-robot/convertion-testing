@@ -4,3 +4,7 @@ desc 'convert files from custom configure.json'
 task :convert do |_t|
   Converter.new.convert
 end
+
+task :convert_only_report do |_t|
+  Converter.new.convert(true)
+end
