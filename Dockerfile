@@ -1,3 +1,6 @@
-FROM ruby:2.4.3
-RUN mkdir /tmp/assets
-ENTRYPOINT ["cp -R /var/www/onlyoffice/documentserver/server/FileConverter/bin/* /tmp/assets"]
+FROM ruby:2.6.0
+RUN mkdir /convertion-testing
+WORKDIR /convertion-testing
+ADD . /convertion-testing
+RUN gem update bundler
+RUN bundle install --without test development

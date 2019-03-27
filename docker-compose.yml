@@ -8,4 +8,5 @@ services:
   convertion-testing:
     build: ./
     tty: true
+    command: ["rspec"]
 
