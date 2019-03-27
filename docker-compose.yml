@@ -1,0 +1,11 @@
+version: '3'
+services:
+  documentserver:
+    image: onlyoffice/4testing-documentserver:latest
+    volumes:
+      - ./bin/:/tmp
+    entrypoint: ["cp", "-ra", "/var/www/onlyoffice/documentserver/server/FileConverter/bin/.", "/tmp"]
+  convertion-testing:
+    build: ./
+    tty: true
+
