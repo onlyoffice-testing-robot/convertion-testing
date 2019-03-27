@@ -11,6 +11,12 @@ describe 'Conversion tests' do
     end
   end
 
+  it 'Check converting from docx to xlsx negative' do
+    filepath = "#{StaticData::NEW_FILES_DIR}/new.docx"
+    file_data = X2t.new.convert(filepath, :xlsx)
+    expect(File.exist?(file_data[:tmp_filename])).to be_falsey
+  end
+
   after :all do
     FileHelper.clear_tmp
   end
