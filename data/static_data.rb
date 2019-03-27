@@ -5,4 +5,12 @@ class StaticData
                   libXpsFile.so libPdfWriter.so libXpsFile.so libkernel.so libgraphics.so].freeze
 
   PROJECT_BIN_PATH = "#{File.join(File.dirname(__FILE__), '/..')}/bin".freeze
+  CONVERSION_DIRECT = {
+    docx: %i[doct],
+    xlsx: %i[xlst],
+    pptx: %i[pptt]
+  }.freeze
+
+  TMP_DIR = "#{File.join(File.dirname(__FILE__), '/..')}/tmp".freeze
+  NEW_FILES_DIR = "#{File.join(File.dirname(__FILE__), '/..')}/assets/files/new".freeze
 end
