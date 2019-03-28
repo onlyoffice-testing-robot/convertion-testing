@@ -1,4 +1,6 @@
 require 'rspec'
+s3 = OnlyofficeS3Wrapper::AmazonS3Wrapper.new
+palladium = PalladiumHelper.new(X2t.new.version, 'Conversion tests smoke')
 
 describe 'Conversion tests' do
   StaticData::CONVERSION_STRAIGHT.each_pair do |format_from, formats_to|
@@ -18,13 +20,13 @@ describe 'Conversion tests' do
   end
 
   it 'Check conversion with files from s3' do
-    s3 = OnlyofficeS3Wrapper::AmazonS3Wrapper.new
     s3.download_file_by_name('files_for_tests/docx/Newsletter.docx', StaticData::TMP_DIR)
     file_data = X2t.new.convert("#{StaticData::TMP_DIR}/Newsletter.docx", :doct)
     expect(File.exist?(file_data[:tmp_filename])).to be_truthy
   end
 
-  after :each do
+  after :each do |example|
     FileHelper.clear_tmp
+    palladium.add_result_and_log(example)
   end
 end

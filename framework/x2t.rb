@@ -15,7 +15,7 @@ class X2t
 
   def convert(file, format)
     tmp_filename = "#{StaticData::TMP_DIR}/#{Time.now.nsec}.#{format}"
-    puts "Conversion #{file} to #{format} (#{tmp_filename})"
+    OnlyofficeLoggerHelper.log  "Conversion #{file} to #{format} (#{tmp_filename})"
     t_start = Time.now
     output = `#{@path} "#{file}" "#{tmp_filename}"`
     elapsed = Time.now - t_start
