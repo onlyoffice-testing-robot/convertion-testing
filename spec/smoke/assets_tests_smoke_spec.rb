@@ -1,5 +1,7 @@
 require 'rspec'
 
+palladium = PalladiumHelper.new(X2t.new.version, 'Conversion tests smoke')
+
 describe 'Assets tests' do
 
   describe 'libraries' do
@@ -18,5 +20,9 @@ describe 'Assets tests' do
     it 'x2t version non empty check' do
       expect(X2t.new.version).not_to be_empty
     end
+  end
+
+  after :each do |example|
+    palladium.add_result_and_log(example)
   end
 end
