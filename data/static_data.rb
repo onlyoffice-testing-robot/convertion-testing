@@ -5,10 +5,15 @@ class StaticData
                   libXpsFile.so libPdfWriter.so libXpsFile.so libkernel.so libgraphics.so].freeze
 
   PROJECT_BIN_PATH = "#{File.join(File.dirname(__FILE__), '/..')}/bin".freeze
-  CONVERSION_DIRECT = {
-    docx: %i[doct],
+  CONVERSION_STRAIGHT = {
+    docx: %i[doct odt rtf],
     xlsx: %i[xlst],
     pptx: %i[pptt]
+  }.freeze
+
+  CONVERSION_FROM_XML = {
+      docx: %i[txt],
+      xlsx: %i[csv]
   }.freeze
 
   TMP_DIR = "#{File.join(File.dirname(__FILE__), '/..')}/tmp".freeze

@@ -1,7 +1,7 @@
 require 'rspec'
 
 describe 'Conversion tests' do
-  StaticData::CONVERSION_DIRECT.each_pair do |format_from, formats_to|
+  StaticData::CONVERSION_STRAIGHT.each_pair do |format_from, formats_to|
     formats_to.each do |format_to|
       it "Check converting from #{format_from} to #{format_to}" do
         filepath = "#{StaticData::NEW_FILES_DIR}/new.#{format_from}"
