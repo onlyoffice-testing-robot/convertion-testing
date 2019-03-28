@@ -1,6 +1,6 @@
 require 'rspec'
 
-palladium = PalladiumHelper.new(X2t.new.version, 'Conversion tests smoke')
+palladium = PalladiumHelper.new(X2t.new.version, 'Assets tests smoke')
 
 describe 'Assets tests' do
 
