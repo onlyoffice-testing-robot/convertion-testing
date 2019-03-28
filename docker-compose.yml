@@ -8,5 +8,9 @@ services:
   convertion-testing:
     build: ./
     tty: true
+    environment:
+      - ENV S3_KEY ""
+      - ENV S3_PRIVATE_KEY ""
+      - ENV PALLADIUM_TOKEN ""
     command: ["rspec"]
 
