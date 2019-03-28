@@ -12,8 +12,8 @@ class StaticData
   }.freeze
 
   CONVERSION_FROM_XML = {
-      docx: %i[txt],
-      xlsx: %i[csv]
+    docx: %i[txt],
+    xlsx: %i[csv]
   }.freeze
 
   TMP_DIR = "#{File.join(File.dirname(__FILE__), '/..')}/tmp".freeze
