@@ -20,11 +20,12 @@ class StaticData
   NEW_FILES_DIR = "#{File.join(File.dirname(__FILE__), '/..')}/assets/files/new".freeze
 
   PROJECT_NAME = 'X2t testing'.freeze
-  PALLADIUM_SERVER = 'palladium.teamlab.info'
+  PALLADIUM_SERVER = 'palladium.teamlab.info'.freeze
   POSITIVE_STATUSES = %w[passed passed_2 pending].freeze
 
   def self.get_palladium_token
     return ENV['PALLADIUM_TOKEN'] if ENV['PALLADIUM_TOKEN']
+
     File.read("#{ENV['HOME']}/.palladium/token")
   end
 end

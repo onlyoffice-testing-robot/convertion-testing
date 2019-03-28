@@ -3,7 +3,6 @@ require 'rspec'
 palladium = PalladiumHelper.new(X2t.new.version, 'Assets tests smoke')
 
 describe 'Assets tests' do
-
   describe 'libraries' do
     StaticData::LIBS_ARRAY.each do |lib|
       it "Lib #{lib} exist check" do
