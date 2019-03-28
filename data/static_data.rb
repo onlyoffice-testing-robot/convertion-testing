@@ -21,6 +21,7 @@ class StaticData
 
   PROJECT_NAME = 'X2t testing'.freeze
   PALLADIUM_SERVER = 'palladium.teamlab.info'
+  POSITIVE_STATUSES = %w[passed passed_2 pending].freeze
 
   def self.get_palladium_token
     return ENV['PALLADIUM_TOKEN'] if ENV['PALLADIUM_TOKEN']
