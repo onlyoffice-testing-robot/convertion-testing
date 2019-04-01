@@ -2,6 +2,7 @@
 class X2t
   def initialize(x2t_path = "#{StaticData::PROJECT_BIN_PATH}/x2t")
     @path = x2t_path
+    @fonts_path = StaticData::FONTS_PATH
     ENV['LD_LIBRARY_PATH'] = StaticData::PROJECT_BIN_PATH
   end
 
@@ -15,9 +16,9 @@ class X2t
 
   def convert(file, format)
     tmp_filename = "#{StaticData::TMP_DIR}/#{Time.now.nsec}.#{format}"
-    OnlyofficeLoggerHelper.log "Conversion #{file} to #{format} (#{tmp_filename})"
     t_start = Time.now
-    output = `#{@path} "#{file}" "#{tmp_filename}"`
+    OnlyofficeLoggerHelper.log "#{@path} \"#{file}\" \"#{tmp_filename}\""
+    output = `#{@path} "#{file}" "#{tmp_filename}" "#{@fonts_path}" 2>&1`
     elapsed = Time.now - t_start
     { tmp_filename: tmp_filename, elapsed: elapsed, x2t_result: output }
   end
