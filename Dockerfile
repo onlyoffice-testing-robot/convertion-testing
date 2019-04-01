@@ -3,9 +3,9 @@ ENV S3_KEY ""
 ENV S3_PRIVATE_KEY ""
 ENV PALLADIUM_TOKEN ""
 
-RUN mkdir /convertion-testing
-WORKDIR /convertion-testing
-ADD . /convertion-testing
+RUN mkdir /testing-x2t
+WORKDIR /testing-x2t
+ADD . /testing-x2t
 RUN gem install bundler
 RUN gem update --system
 RUN bundler install
