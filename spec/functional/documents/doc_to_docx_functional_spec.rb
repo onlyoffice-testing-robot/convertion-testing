@@ -15,6 +15,6 @@ describe 'Conversion doc files to docx' do
 
   after :each do |example|
     FileHelper.clear_tmp
-    palladium.add_result_and_log(example)
+    palladium.add_result(example)
   end
 end
