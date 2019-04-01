@@ -19,6 +19,7 @@ class StaticData
 
   TMP_DIR = "#{File.join(File.dirname(__FILE__), '/..')}/tmp".freeze
   NEW_FILES_DIR = "#{File.join(File.dirname(__FILE__), '/..')}/assets/files/new".freeze
+  BROKEN_FILES_DIR = "#{File.join(File.dirname(__FILE__), '/..')}/assets/files/broken".freeze
 
   PROJECT_NAME = 'X2t testing'.freeze
   PALLADIUM_SERVER = 'palladium.teamlab.info'.freeze

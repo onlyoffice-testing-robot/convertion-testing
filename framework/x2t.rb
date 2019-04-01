@@ -21,8 +21,10 @@ class X2t
     OnlyofficeLoggerHelper.log "#{@path} \"#{file}\" \"#{tmp_filename}\""
     output = `#{@path} "#{file}" "#{tmp_filename}" "#{@fonts_path}" 2>&1`
     elapsed = Time.now - t_start
-    size_after = File.size(tmp_filename)
-    result = { tmp_filename: tmp_filename, elapsed: elapsed, size_before: size_before, size_after: size_after }
+    result = { tmp_filename: tmp_filename, elapsed: elapsed, size_before: size_before}
+    if File.exist?(tmp_filename)
+      result[:size_after] = File.size(tmp_filename)
+    end
     result[:x2t_result] = output unless output == ''
     result
   end

@@ -25,6 +25,14 @@ describe 'Conversion tests' do
     expect(File.exist?(file_data[:tmp_filename])).to be_truthy
   end
 
+  it 'Check conversion errors' do
+    filepath = "#{StaticData::BROKEN_FILES_DIR}/It_is_docx_file.xlsx"
+    file_data = X2t.new.convert(filepath, :xlst)
+    expect(File.exist?(file_data[:tmp_filename])).to be_falsey
+    expect(file_data[:size_after]).to be_nil
+    expect(file_data[:x2t_result]).to eq("Couldn't automatically recognize conversion direction from extensions\n")
+  end
+
   after :each do |example|
     FileHelper.clear_tmp
     palladium.add_result(example)
