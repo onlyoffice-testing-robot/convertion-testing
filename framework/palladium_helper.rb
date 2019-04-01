@@ -13,9 +13,11 @@ class PalladiumHelper
 
   def add_result(example, file_data = nil)
     @tcm_helper.parse(example)
-    if file_data && !file_data[:x2t_result].empty?
+    if file_data
       result_message = JSON.parse(@tcm_helper.result_message)
-      result_message['describer'] << { value: file_data[:x2t_result], title: 'x2t_output' }
+      result_message['describer'] << { value: file_data[:x2t_result], title: 'x2t_output' } if file_data[:x2t_result]
+      result_message['describer'] << { value: file_data[:size_before], title: 'size_before (byte)' } if file_data[:size_before]
+      result_message['describer'] << { value: file_data[:size_after], title: 'size_after (byte)' } if file_data[:size_after]
       @tcm_helper.result_message = result_message.to_json
     end
     @palladium.set_result(status: @tcm_helper.status.to_s, description: @tcm_helper.result_message, name: @tcm_helper.case_name)

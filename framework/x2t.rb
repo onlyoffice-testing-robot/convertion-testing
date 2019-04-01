@@ -16,10 +16,14 @@ class X2t
 
   def convert(file, format)
     tmp_filename = "#{StaticData::TMP_DIR}/#{Time.now.nsec}.#{format}"
+    size_before = File.size(file)
     t_start = Time.now
     OnlyofficeLoggerHelper.log "#{@path} \"#{file}\" \"#{tmp_filename}\""
     output = `#{@path} "#{file}" "#{tmp_filename}" "#{@fonts_path}" 2>&1`
     elapsed = Time.now - t_start
-    { tmp_filename: tmp_filename, elapsed: elapsed, x2t_result: output }
+    size_after = File.size(tmp_filename)
+    result = { tmp_filename: tmp_filename, elapsed: elapsed, size_before: size_before, size_after: size_after }
+    result[:x2t_result] = output unless output == ''
+    result
   end
 end
