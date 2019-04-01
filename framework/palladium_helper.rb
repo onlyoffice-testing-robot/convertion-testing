@@ -1,6 +1,9 @@
 require 'palladium'
 class PalladiumHelper
   def initialize(plan_name, run_name)
+    @tcm_helper = OnlyofficeTcmHelper::TcmHelper.new(product_name: StaticData::PROJECT_NAME,
+                                                     plan_name: plan_name,
+                                                     suite_name: run_name)
     @palladium = Palladium.new(host: StaticData::PALLADIUM_SERVER,
                                token: StaticData.get_palladium_token,
                                product: StaticData::PROJECT_NAME,
@@ -8,20 +11,20 @@ class PalladiumHelper
                                run: run_name)
   end
 
-  def get_result_set_link
-    "http://#{@palladium.host}/product/#{@palladium.product_id}/plan/#{@palladium.plan_id}/run/#{@palladium.run_id}/result_set/#{@palladium.result_set_id}"
-  end
-
-  def add_result_and_log(example)
-    result = add_result(example)
-    OnlyofficeLoggerHelper.log("Test is #{result['status']['name']}")
+  def add_result(example, file_data = nil)
+    @tcm_helper.parse(example)
+    if file_data && !file_data[:x2t_result].empty?
+      result_message = JSON.parse(@tcm_helper.result_message)
+      result_message['describer'] << { value: file_data[:x2t_result], title: 'x2t_output' }
+      @tcm_helper.result_message = result_message.to_json
+    end
+    @palladium.set_result(status: @tcm_helper.status.to_s, description: @tcm_helper.result_message, name: @tcm_helper.case_name)
+    OnlyofficeLoggerHelper.log("Test is #{@tcm_helper.status}")
     OnlyofficeLoggerHelper.log(get_result_set_link)
   end
 
-  def add_result(example)
-    name = example.metadata[:description]
-    status, comment = get_status(example)
-    @palladium.set_result(name: name, description: comment, status: status)
+  def get_result_set_link
+    "http://#{@palladium.host}/product/#{@palladium.product_id}/plan/#{@palladium.plan_id}/run/#{@palladium.run_id}/result_set/#{@palladium.result_set_id}"
   end
 
   def get_result_sets(status)

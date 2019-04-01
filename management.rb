@@ -6,6 +6,7 @@ require_relative 'framework/palladium_helper'
 require 'onlyoffice_s3_wrapper'
 require 'onlyoffice_logger_helper'
 require 'palladium'
+require 'onlyoffice_tcm_helper'
 
 class Management
 end
