@@ -2,7 +2,7 @@ require 'rspec'
 s3 = OnlyofficeS3Wrapper::AmazonS3Wrapper.new
 palladium = PalladiumHelper.new(X2t.new.version, 'Xls to Xlsx')
 result_sets = palladium.get_result_sets(StaticData::POSITIVE_STATUSES)
-files = s3.get_files_by_prefix('xls')
+files = s3.get_files_by_prefix('xls/')
 file_data = nil
 describe 'Conversion xls files to xlsx' do
   (files - result_sets.map { |result_set| "doc/#{result_set}" }).each do |file|

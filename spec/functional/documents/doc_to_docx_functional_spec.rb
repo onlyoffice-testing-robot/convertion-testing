@@ -2,7 +2,7 @@ require 'rspec'
 s3 = OnlyofficeS3Wrapper::AmazonS3Wrapper.new
 palladium = PalladiumHelper.new(X2t.new.version, 'Doc to Docx')
 result_sets = palladium.get_result_sets(StaticData::POSITIVE_STATUSES)
-files = s3.get_files_by_prefix('doc')
+files = s3.get_files_by_prefix('doc/')
 file_data = nil
 describe 'Conversion doc files to docx' do
   (files - result_sets.map { |result_set| "doc/#{result_set}" }).each do |file|

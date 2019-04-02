@@ -2,7 +2,7 @@ require 'rspec'
 s3 = OnlyofficeS3Wrapper::AmazonS3Wrapper.new
 palladium = PalladiumHelper.new(X2t.new.version, 'Ppt to Pptx')
 result_sets = palladium.get_result_sets(StaticData::POSITIVE_STATUSES)
-files = s3.get_files_by_prefix('ppt')
+files = s3.get_files_by_prefix('ppt/')
 file_data = nil
 describe 'Conversion ppt files to pptx' do
   (files - result_sets.map { |result_set| "doc/#{result_set}" }).each do |file|
