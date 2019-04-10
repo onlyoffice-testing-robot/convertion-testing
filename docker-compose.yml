@@ -8,5 +8,7 @@ services:
   convertion-testing:
     build: ./
     tty: true
+    depends_on:
+      - documentserver
     command: ["rspec"]
 
