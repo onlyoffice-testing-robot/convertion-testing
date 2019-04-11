@@ -5,7 +5,7 @@ result_sets = palladium.get_result_sets(StaticData::POSITIVE_STATUSES)
 files = s3.get_files_by_prefix('xls/')
 file_data = nil
 describe 'Conversion xls files to xlsx' do
-  (files - result_sets.map { |result_set| "doc/#{result_set}" }).each do |file|
+  (files - result_sets.map { |result_set| "xls/#{result_set}" }).each do |file|
     it File.basename(file) do
       s3.download_file_by_name(file, StaticData::TMP_DIR)
       file_data = X2t.new.convert("#{StaticData::TMP_DIR}/#{File.basename(file)}", :xlsx)
