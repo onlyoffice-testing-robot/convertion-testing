@@ -7,7 +7,7 @@ describe 'Conversion fodp files to pptx' do
   before :each do
     @tmp_dir = FileHelper.create_tmp_dir.first
   end
-  (files - result_sets.map {|result_set| "fodp/#{result_set}"}).each do |file|
+  (files - result_sets.map { |result_set| "fodp/#{result_set}" }).each do |file|
     it File.basename(file) do
       s3.download_file_by_name(file, @tmp_dir)
       @file_data = X2t.new.convert("#{@tmp_dir}/#{File.basename(file)}", :pptx, @tmp_dir)

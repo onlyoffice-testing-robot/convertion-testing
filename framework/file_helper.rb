@@ -1,7 +1,7 @@
 class FileHelper
   def self.delete_tmp(dir)
     OnlyofficeLoggerHelper.log('Clear tmp dir')
-    FileUtils.rm_rf(Dir.glob("#{dir}"))
+    FileUtils.rm_rf(Dir.glob(dir.to_s))
   end
 
   def self.create_tmp_dir

@@ -22,9 +22,7 @@ class X2t
     output = `#{@path} "#{file}" "#{tmp_filename}" "#{@fonts_path}" 2>&1`
     elapsed = Time.now - t_start
     result = { tmp_filename: tmp_filename, elapsed: elapsed, size_before: size_before }
-    if File.exist?(tmp_filename)
-      result[:size_after] = File.size(tmp_filename)
-    end
+    result[:size_after] = File.size(tmp_filename) if File.exist?(tmp_filename)
     result[:x2t_result] = output.split("\n")[0..2].join("\n") unless output == ''
     result
   end
