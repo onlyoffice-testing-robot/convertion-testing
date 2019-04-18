@@ -14,14 +14,14 @@ class X2t
     `#{@path} ` + command
   end
 
-  def convert(file, format)
-    tmp_filename = "#{StaticData::TMP_DIR}/#{Time.now.nsec}.#{format}"
+  def convert(file, format, tmp_dir = StaticData::TMP_DIR)
+    tmp_filename = "#{tmp_dir}/#{Time.now.nsec}.#{format}"
     size_before = File.size(file)
     t_start = Time.now
     OnlyofficeLoggerHelper.log "#{@path} \"#{file}\" \"#{tmp_filename}\""
     output = `#{@path} "#{file}" "#{tmp_filename}" "#{@fonts_path}" 2>&1`
     elapsed = Time.now - t_start
-    result = { tmp_filename: tmp_filename, elapsed: elapsed, size_before: size_before}
+    result = { tmp_filename: tmp_filename, elapsed: elapsed, size_before: size_before }
     if File.exist?(tmp_filename)
       result[:size_after] = File.size(tmp_filename)
     end
