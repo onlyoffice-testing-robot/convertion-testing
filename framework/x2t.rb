@@ -25,7 +25,7 @@ class X2t
     if File.exist?(tmp_filename)
       result[:size_after] = File.size(tmp_filename)
     end
-    result[:x2t_result] = output unless output == ''
+    result[:x2t_result] = output.split("\n")[0..2].join("\n") unless output == ''
     result
   end
 end
