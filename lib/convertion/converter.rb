@@ -83,16 +83,16 @@ class Converter
     first_line_result(performance_test)
     files = get_file_paths_list(@convert_from)
     files.each do |current_file_to_convert|
-      unless current_file_to_convert.include?('/home/flamine/work/xlsx/Temp/')
-        p current_file_to_convert
-        if @output_format == ('docm' || 'xlsm' || 'pptm')
-          if check_macros(current_file_to_convert)
-            p "Skip #{current_file_to_convert} because it has no macros for #{@output_format}"
-            next
-          end
+      next if current_file_to_convert.include?('/home/flamine/work/xlsx/Temp/')
+
+      p current_file_to_convert
+      if @output_format == ('docm' || 'xlsm' || 'pptm')
+        if check_macros(current_file_to_convert)
+          p "Skip #{current_file_to_convert} because it has no macros for #{@output_format}"
+          next
         end
-        convert_file(current_file_to_convert, performance_test)
       end
+      convert_file(current_file_to_convert, performance_test)
     end
     @output_folder
   end
