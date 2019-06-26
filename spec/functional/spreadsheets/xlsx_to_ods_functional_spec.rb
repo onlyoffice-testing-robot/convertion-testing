@@ -10,6 +10,7 @@ describe 'Conversion xlsx files to ods' do
   (files - result_sets.map { |result_set| "xlsx/#{result_set}" }).each do |file|
     next if File.basename(file) == 'сравнение формул.xlsx' # file is too complicated
     next if File.basename(file) == 'Smaller50MB.xlsx' # file is too big
+
     it File.basename(file) do
       s3.download_file_by_name(file, @tmp_dir)
       @file_data = X2t.new.convert("#{@tmp_dir}/#{File.basename(file)}", :ods, @tmp_dir)
