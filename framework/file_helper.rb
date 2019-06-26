@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FileHelper
   def self.delete_tmp(dir)
     OnlyofficeLoggerHelper.log('Clear tmp dir')

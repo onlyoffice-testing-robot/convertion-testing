@@ -1,4 +1,5 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
 class FileHelper
   class << self
     # Return name of file from full path
@@ -46,21 +47,16 @@ class FileHelper
         LoggerHelper.print_to_log("Waiting for #{timer} seconds from #{timeout}")
         sleep 1
         timer += 1
-        if timer > timeout
-          raise "Timeout #{timeout} for downloading file #{path} is exceed"
-        end
+        raise "Timeout #{timeout} for downloading file #{path} is exceed" if timer > timeout
       end
       sleep 1
-      if timer <= timeout
-        true
-      else
-        false
-      end
+      timer <= timeout
     end
 
     def read_file_to_string(file_name)
       result_string = ''
       raise 'File not found: ' + file_name.to_s unless File.exist?(file_name)
+
       File.open(file_name, 'r') do |infile|
         while (line = infile.gets)
           result_string += line
@@ -72,6 +68,7 @@ class FileHelper
     def read_array_from_file(file_name)
       result_array = []
       return [] unless File.exist?(file_name)
+
       File.open(file_name, 'r') do |infile|
         while (line = infile.gets)
           result_array << line.sub("\n", '')
@@ -102,6 +99,7 @@ class FileHelper
     def extract_to_folder(path_to_archive,
                           path_to_extract = path_to_archive.chomp(File.basename(path_to_archive)))
       raise 'File not found: ' + path_to_archive.to_s unless wait_file_to_download(path_to_archive)
+
       path_to_extract += '/' unless path_to_extract[-1] == '/'
       path_to_file = path_to_extract + File.basename(path_to_archive)
       # unless File.exist?(path_to_file)
@@ -136,7 +134,8 @@ class FileHelper
     def directory_hash(path)
       files = []
       Dir.foreach(path).sort.each do |entry|
-        next if entry == '..' || entry == '.'
+        next if ['.', '..'].include?(entry)
+
         full_path = File.join(path, entry)
         if File.directory?(full_path)
           files += directory_hash(full_path)
@@ -154,6 +153,7 @@ class FileHelper
       paths = []
       Find.find(directory) do |path|
         next if FileTest.directory?(path)
+
         if extension.nil?
           paths << path
         elsif File.extname(path) == ".#{extension}"

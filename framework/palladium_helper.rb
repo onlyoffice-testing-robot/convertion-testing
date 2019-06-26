@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'palladium'
 class PalladiumHelper
   def initialize(plan_name, run_name)
