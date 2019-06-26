@@ -29,9 +29,10 @@ GIT
 
 GIT
   remote: https://github.com/onlyoffice-testing-robot/onlyoffice_tcm_helper
-  revision: 28001169e38a03f0f57a39742c9eb78c110290cc
+  revision: 24d8daebd8102bc443ef31dd3a42a471e2e21c43
   specs:
     onlyoffice_tcm_helper (0.1.1)
+      onlyoffice_file_helper (~> 0.1)
 
 GEM
   remote: https://rubygems.org/
