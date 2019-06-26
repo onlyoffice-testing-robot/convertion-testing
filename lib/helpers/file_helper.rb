@@ -51,11 +51,7 @@ class FileHelper
         end
       end
       sleep 1
-      if timer <= timeout
-        true
-      else
-        false
-      end
+      timer <= timeout
     end
 
     def read_file_to_string(file_name)
