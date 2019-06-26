@@ -136,7 +136,7 @@ class FileHelper
     def directory_hash(path)
       files = []
       Dir.foreach(path).sort.each do |entry|
-        next if entry == '..' || entry == '.'
+        next if ['.', '..'].include?(entry)
 
         full_path = File.join(path, entry)
         if File.directory?(full_path)
