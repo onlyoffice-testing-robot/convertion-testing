@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # class for adding ability to use x2t
 class X2t
   def initialize(x2t_path = "#{StaticData::PROJECT_BIN_PATH}/x2t")

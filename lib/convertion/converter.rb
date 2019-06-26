@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../app_manager'
 require 'yaml'
 # use Converter.new.convert for convert by config

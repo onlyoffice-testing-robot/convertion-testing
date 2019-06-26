@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rspec'
 
 palladium = PalladiumHelper.new(X2t.new.version, 'Assets tests smoke')

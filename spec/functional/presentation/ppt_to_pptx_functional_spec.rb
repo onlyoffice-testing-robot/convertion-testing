@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rspec'
 s3 = OnlyofficeS3Wrapper::AmazonS3Wrapper.new
 palladium = PalladiumHelper.new(X2t.new.version, 'Ppt to Pptx')

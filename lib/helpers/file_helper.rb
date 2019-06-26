@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FileHelper
   class << self
     # Return name of file from full path
