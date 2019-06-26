@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class FileHelper
   class << self
     # Return name of file from full path

@@ -62,12 +62,6 @@ Style/Documentation:
     - 'lib/helpers/file_helper.rb'
     - 'lib/helpers/logger_helper.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/Encoding:
-  Exclude:
-    - 'lib/helpers/file_helper.rb'
-
 # Offense count: 31
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
