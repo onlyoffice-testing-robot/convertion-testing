@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/ONLYOFFICE/ooxml_parser
-  revision: f43b72fccf3f4904835e009c31b7ef000640bcbc
+  revision: 70bd4c91676d54d0ff03e4f044605c3a9ec02bf1
   specs:
     ooxml_parser (0.4.1)
       nokogiri (~> 1.6)
@@ -58,7 +58,7 @@ GEM
     jaro_winkler (1.5.4)
     jmespath (1.4.0)
     mini_portile2 (2.4.0)
-    nokogiri (1.10.5)
+    nokogiri (1.10.7)
       mini_portile2 (~> 2.4.0)
     onlyoffice_file_helper (0.1.0)
       onlyoffice_logger_helper (~> 1)
