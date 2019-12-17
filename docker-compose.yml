@@ -10,5 +10,5 @@ services:
     tty: true
     depends_on:
       - documentserver
-    command: ["rspec"]
+    command: ["bundle", "exec", "rspec"]
 
