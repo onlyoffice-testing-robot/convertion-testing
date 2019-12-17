@@ -9,4 +9,5 @@ RUN gem update --system
 RUN mkdir /testing-x2t
 WORKDIR /testing-x2t
 ADD . /testing-x2t
-RUN bundler install
+RUN gem install bundler
+RUN bundle config set without 'test development'
