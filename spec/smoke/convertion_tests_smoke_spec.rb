@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rspec'
-palladium = PalladiumHelper.new(@x2t.version, 'Conversion tests smoke')
+palladium = PalladiumHelper.new(x2t.version, 'Conversion tests smoke')
 
 describe 'Conversion tests' do
   before :each do
@@ -12,7 +12,7 @@ describe 'Conversion tests' do
     formats_to.each do |format|
       it "Check converting from #{format_from} to #{format}" do
         filepath = "#{StaticData::NEW_FILES_DIR}/new.#{format_from}"
-        file_data = @x2t.convert(filepath, format)
+        file_data = x2t.convert(filepath, format)
         expect(File.exist?(file_data[:tmp_filename])).to be_truthy
       end
     end
@@ -20,19 +20,19 @@ describe 'Conversion tests' do
 
   it 'Check converting from docx to xlsx negative' do
     filepath = "#{StaticData::NEW_FILES_DIR}/new.docx"
-    file_data = @x2t.convert(filepath, :xlsx)
+    file_data = x2t.convert(filepath, :xlsx)
     expect(File.exist?(file_data[:tmp_filename])).to be_falsey
   end
 
   it 'Check conversion with files from s3' do
-    @s3.download_file_by_name('files_for_tests/docx/Newsletter.docx', StaticData::TMP_DIR)
-    file_data = @x2t.convert("#{StaticData::TMP_DIR}/Newsletter.docx", :doct)
+    s3.download_file_by_name('files_for_tests/docx/Newsletter.docx', StaticData::TMP_DIR)
+    file_data = x2t.convert("#{StaticData::TMP_DIR}/Newsletter.docx", :doct)
     expect(File.exist?(file_data[:tmp_filename])).to be_truthy
   end
 
   it 'Check conversion errors' do
     filepath = "#{StaticData::BROKEN_FILES_DIR}/It_is_docx_file.xlsx"
-    file_data = @x2t.convert(filepath, :xlst)
+    file_data = x2t.convert(filepath, :xlst)
     expect(File.exist?(file_data[:tmp_filename])).to be_falsey
     expect(file_data[:size_after]).to be_nil
     expect(file_data[:x2t_result]).to eq("Couldn't automatically recognize conversion direction from extensions")

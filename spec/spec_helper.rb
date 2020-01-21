@@ -1,8 +1,18 @@
 # frozen_string_literal: true
 
 require_relative '../management'
-@s3 = OnlyofficeS3Wrapper::AmazonS3Wrapper.new
-@x2t = X2t.new
+
+def s3
+  @s3 ||= OnlyofficeS3Wrapper::AmazonS3Wrapper.new
+end
+
+def x2t
+  @x2t ||= X2t.new(x2t_path: "#{StaticData::PROJECT_BIN_PATH}/x2t",
+                   fonts_path: StaticData::FONTS_PATH,
+                   lib_path: StaticData::PROJECT_BIN_PATH,
+                   tmp_path: StaticData::TMP_DIR)
+end
+
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
