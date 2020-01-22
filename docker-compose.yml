@@ -5,10 +5,9 @@ services:
     volumes:
       - ./bin/:/tmp
     entrypoint: ["cp", "-ra", "/var/www/onlyoffice/documentserver/server/FileConverter/bin/.", "/tmp"]
-  convertion-testing:
+  x2t-testing:
     build: ./
     tty: true
     depends_on:
       - documentserver
     command: ["bundle", "exec", "rspec"]
-
