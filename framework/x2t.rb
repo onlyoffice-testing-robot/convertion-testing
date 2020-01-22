@@ -2,12 +2,18 @@
 
 # class for adding ability to use x2t
 class X2t
-  def initialize(x2t_path = "#{StaticData::PROJECT_BIN_PATH}/x2t")
-    @path = x2t_path
-    @fonts_path = StaticData::FONTS_PATH
-    ENV['LD_LIBRARY_PATH'] = StaticData::PROJECT_BIN_PATH
+  # @param [Hash] options is a hash with required keys:
+  # :x2t_path - is a path to x2t file
+  # :fonts_path  - is a path to folder with fonts
+  # :lib_path - is a path to all libs for x2t
+  def initialize(options = {})
+    @path = options[:x2t_path]
+    @fonts_path = options[:fonts_path]
+    @tmp_path = options[:tmp_path]
+    ENV['LD_LIBRARY_PATH'] = options[:lib_path]
   end
 
+  # getting x2t version
   def version
     `#{@path}`.match(/Version: (.*)/)[1]
   end
@@ -16,12 +22,13 @@ class X2t
     `#{@path} ` + command
   end
 
-  def convert(file, format, tmp_dir = StaticData::TMP_DIR)
-    tmp_filename = "#{tmp_dir}/#{Time.now.nsec}.#{format}"
-    size_before = File.size(file)
+  # @param [String] filepath is a path to file for convert
+  def convert(filepath, format)
+    tmp_filename = "#{@tmp_path}/#{Time.now.nsec}.#{format}"
+    size_before = File.size(filepath)
     t_start = Time.now
-    OnlyofficeLoggerHelper.log "#{@path} \"#{file}\" \"#{tmp_filename}\""
-    output = `#{@path} "#{file}" "#{tmp_filename}" "#{@fonts_path}" 2>&1`
+    OnlyofficeLoggerHelper.log "#{@path} \"#{filepath}\" \"#{tmp_filename}\""
+    output = `#{@path} "#{filepath}" "#{tmp_filename}" "#{@fonts_path}" 2>&1`
     elapsed = Time.now - t_start
     result = { tmp_filename: tmp_filename, elapsed: elapsed, size_before: size_before }
     result[:size_after] = File.size(tmp_filename) if File.exist?(tmp_filename)

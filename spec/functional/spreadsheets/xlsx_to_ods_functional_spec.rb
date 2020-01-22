@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 require 'rspec'
-s3 = OnlyofficeS3Wrapper::AmazonS3Wrapper.new
-palladium = PalladiumHelper.new(X2t.new.version, 'Xlsx to Ods')
+palladium = PalladiumHelper.new(x2t.version, 'Xlsx to Ods')
 result_sets = palladium.get_result_sets(StaticData::POSITIVE_STATUSES)
 files = s3.get_files_by_prefix('xlsx/')
 describe 'Conversion xlsx files to ods' do
@@ -15,7 +14,7 @@ describe 'Conversion xlsx files to ods' do
 
     it File.basename(file) do
       s3.download_file_by_name(file, @tmp_dir)
-      @file_data = X2t.new.convert("#{@tmp_dir}/#{File.basename(file)}", :ods, @tmp_dir)
+      @file_data = x2t.convert("#{@tmp_dir}/#{File.basename(file)}", :ods)
       expect(File.exist?(@file_data[:tmp_filename])).to be_truthy
     end
   end
