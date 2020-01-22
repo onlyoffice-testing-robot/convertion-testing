@@ -9,8 +9,11 @@ Change **dockerfile** and **docker-compose** file.
 1) change image in docker-compose.
 
 2) Set 3 environment variables in dockerfile: 
+
 **S3_KEY** - is a public s3 key for getting files
+
 **S3_PRIVATE_KEY** - is a private s3 key for getting files
+
 **PALLADIUM_TOKEN** - is a palladium token for writing results.
 
 
@@ -41,9 +44,13 @@ Example:
 
 ```
 **convert_from** - is a full path to folder 
+
 **convert_to** - is a folder name for results. Every conversion will create new dir for files in it
+
 **format** - files will be converted to this format
+
 **x2t_path** - path to x2t file. 
+
 **font_path**- path to fonts folder
 
 After adding settings, you need to run task
