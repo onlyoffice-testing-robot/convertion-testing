@@ -3,7 +3,7 @@
 require_relative '../management'
 
 def s3
-  @s3 ||= OnlyofficeS3Wrapper::AmazonS3Wrapper.new
+  @s3 ||= OnlyofficeS3Wrapper::AmazonS3Wrapper.new(bucket_name: 'conversion-testing-files', region: 'us-east-1')
 end
 
 def x2t
