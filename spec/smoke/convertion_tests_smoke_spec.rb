@@ -25,7 +25,7 @@ describe 'Conversion tests' do
   end
 
   it 'Check conversion with files from s3' do
-    s3.download_file_by_name('files_for_tests/docx/Newsletter.docx', StaticData::TMP_DIR)
+    s3.download_file_by_name('docx/Newsletter.docx', StaticData::TMP_DIR)
     file_data = x2t.convert("#{StaticData::TMP_DIR}/Newsletter.docx", :doct)
     expect(File.exist?(file_data[:tmp_filename])).to be_truthy
   end
