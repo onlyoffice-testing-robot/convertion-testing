@@ -24,12 +24,6 @@ describe 'Conversion tests' do
     expect(File.exist?(file_data[:tmp_filename])).to be_falsey
   end
 
-  it 'Check conversion with files from s3' do
-    s3.download_file_by_name('docx/Newsletter.docx', StaticData::TMP_DIR)
-    file_data = x2t.convert("#{StaticData::TMP_DIR}/Newsletter.docx", :doct)
-    expect(File.exist?(file_data[:tmp_filename])).to be_truthy
-  end
-
   it 'Check conversion errors' do
     filepath = "#{StaticData::BROKEN_FILES_DIR}/It_is_docx_file.xlsx"
     file_data = x2t.convert(filepath, :xlst)
