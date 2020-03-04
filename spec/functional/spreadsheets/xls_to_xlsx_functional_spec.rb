@@ -10,6 +10,7 @@ describe 'Conversion xls files to xlsx' do
   end
   (files - result_sets.map { |result_set| "xls/#{result_set}" }).each do |file|
     it File.basename(file) do
+      skip if File.basename(file) == 'price-full.xls'
       s3.download_file_by_name(file, @tmp_dir)
       @file_data = x2t.convert("#{@tmp_dir}/#{File.basename(file)}", :xlsx)
       expect(File.exist?(@file_data[:tmp_filename])).to be_truthy
