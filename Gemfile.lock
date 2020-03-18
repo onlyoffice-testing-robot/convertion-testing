@@ -15,9 +15,9 @@ GIT
 
 GIT
   remote: https://github.com/onlyoffice-testing-robot/onlyoffice_logger_helper.git
-  revision: 6719da93effe6152454f84ea1a3f7d95437d604b
+  revision: 3c538cd67ae5c6be07d574fbfd9d2481397cdfe3
   specs:
-    onlyoffice_logger_helper (1.0.1)
+    onlyoffice_logger_helper (1.0.2)
 
 GIT
   remote: https://github.com/onlyoffice-testing-robot/onlyoffice_s3_wrapper
