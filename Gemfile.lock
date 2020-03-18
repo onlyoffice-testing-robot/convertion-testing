@@ -14,12 +14,6 @@ GIT
     palladium (0.3.4)
 
 GIT
-  remote: https://github.com/onlyoffice-testing-robot/onlyoffice_logger_helper.git
-  revision: 6719da93effe6152454f84ea1a3f7d95437d604b
-  specs:
-    onlyoffice_logger_helper (1.0.1)
-
-GIT
   remote: https://github.com/onlyoffice-testing-robot/onlyoffice_s3_wrapper
   revision: 68fe0b5900b5754832dd3e983a69d17659b01109
   specs:
@@ -63,6 +57,7 @@ GEM
     onlyoffice_file_helper (0.1.0)
       onlyoffice_logger_helper (~> 1)
       rubyzip (~> 1.0)
+    onlyoffice_logger_helper (1.0.2)
     parallel (1.19.1)
     parser (2.7.0.3)
       ast (~> 2.4.0)
@@ -99,7 +94,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  onlyoffice_logger_helper!
+  onlyoffice_logger_helper
   onlyoffice_s3_wrapper!
   onlyoffice_tcm_helper!
   ooxml_parser!
