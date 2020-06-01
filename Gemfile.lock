@@ -47,7 +47,7 @@ GEM
     onlyoffice_file_helper (0.1.0)
       onlyoffice_logger_helper (~> 1)
       rubyzip (~> 1.0)
-    onlyoffice_logger_helper (1.0.2)
+    onlyoffice_logger_helper (1.0.3)
     ooxml_parser (0.6.0)
       nokogiri (~> 1.6)
       ruby-filemagic (~> 0.1)
