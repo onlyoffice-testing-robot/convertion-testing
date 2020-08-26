@@ -10,7 +10,6 @@ describe 'Conversion ppt files to pptx' do
   end
   (files - result_sets.map { |result_set| "ppt/#{result_set}" }).each do |file|
     it File.basename(file) do
-      skip if File.basename(file) == 'empty(пустой слайд).ppt'
       s3.download_file_by_name(file, @tmp_dir)
       @file_data = x2t.convert("#{@tmp_dir}/#{File.basename(file)}", :pptx)
       expect(File.exist?(@file_data[:tmp_filename])).to be_truthy

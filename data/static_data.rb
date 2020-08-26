@@ -23,7 +23,7 @@ class StaticData
   NEW_FILES_DIR = "#{File.join(File.dirname(__FILE__), '/..')}/assets/files/new"
   BROKEN_FILES_DIR = "#{File.join(File.dirname(__FILE__), '/..')}/assets/files/broken"
 
-  EMPTY_FILES = ['empty(слайдов нет).ppt', 'empty.rtf', 'new.rtf'].freeze
+  EMPTY_FILES = ['empty(слайдов нет).ppt', 'empty.rtf', 'new.rtf', 'empty(пустой слайд).ppt'].freeze
 
   PROJECT_NAME = 'X2t testing'
   PALLADIUM_SERVER = 'palladium.teamlab.info'
