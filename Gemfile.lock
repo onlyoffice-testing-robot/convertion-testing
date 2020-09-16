@@ -6,7 +6,7 @@ GIT
 
 GIT
   remote: https://github.com/onlyoffice-testing-robot/onlyoffice_s3_wrapper
-  revision: b699b6528e72c1159a058710dbac0c9e782af8c0
+  revision: 2dea740a57c8a9abaa917571f256f5722934f82f
   specs:
     onlyoffice_s3_wrapper (0.3.0)
       aws-sdk-s3 (= 1.80.0)
@@ -24,13 +24,13 @@ GEM
   specs:
     ast (2.4.1)
     aws-eventstream (1.1.0)
-    aws-partitions (1.368.0)
-    aws-sdk-core (3.105.0)
+    aws-partitions (1.370.0)
+    aws-sdk-core (3.107.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.37.0)
+    aws-sdk-kms (1.38.0)
       aws-sdk-core (~> 3, >= 3.99.0)
       aws-sigv4 (~> 1.1)
     aws-sdk-s3 (1.80.0)
