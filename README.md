@@ -1,3 +1,5 @@
+# This project is moved to new oranization, use [ONLYOFFICE-QA/x2t-testing](https://github.com/ONLYOFFICE-QA/x2t-testing) instead 
+
 # Testing x2t
 
 Is project for testing main conversion lib in onlyoffice documentserver
